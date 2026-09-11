@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#0e1217">
+  <meta name="description" content="Digital Business Card for Elijah Sellers, IT Specialist at JMEG, LLC.">
+  <meta property="og:title" content="Elijah Sellers | IT Specialist - JMEG, LLC">
+  <meta property="og:description" content="Technology operations, network infrastructure, and IT support across JMEG.">
+  <meta property="og:image" content="static/profile.png">
+  <title>Elijah Sellers | IT Specialist - JMEG, LLC</title>
+  <style>
+    /* === DESIGN SYSTEM & JMEG BRAND PALETTE === */
+    :root {
+      --bg-dark: #0e1217;
+      --card-bg: #161b22;
+      --card-inner: #1c222b;
+      --card-border: rgba(255, 255, 255, 0.08);
+      --card-border-glow: rgba(0, 110, 199, 0.25);
+      
+      /* Brand colors extracted from JMEG logo */
+      --jmeg-blue: #004881;
+      --jmeg-blue-light: #006ec7;
+      --jmeg-blue-electric: #38bdf8;
+      --jmeg-silver: #B6B7BA;
+      --jmeg-silver-light: #e2e8f0;
+      
+      /* Typography */
+      --text-white: #ffffff;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+      
+      /* Button styles */
+      --btn-bg: #1e2530;
+      --btn-hover: #262f3e;
+      --btn-border: rgba(255, 255, 255, 0.09);
+      
+      /* Radius */
+      --radius-card: 28px;
+      --radius-lg: 18px;
+      --radius-md: 14px;
+      --radius-sm: 10px;
+      --radius-pill: 9999px;
+      
+      /* Shadows */
+      --shadow-card: 0 24px 50px -12px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.06);
+      --shadow-btn: 0 4px 14px rgba(0, 0, 0, 0.25);
+      --shadow-cta: 0 10px 28px -4px rgba(0, 110, 199, 0.55);
+      
+      /* Font */
+      --font-system: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    }
+
+    /* === CSS RESET & BASE STYLES === */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html {
+      font-size: 16px;
+      background-color: var(--bg-dark);
+      color: var(--text-white);
+      font-family: var(--font-system);
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      min-height: 100dvh;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      background: var(--bg-dark) radial-gradient(circle at 50% 0%, rgba(0, 72, 129, 0.38) 0%, rgba(14, 18, 23, 0) 75%) no-repeat;
+      padding: 16px 12px 32px;
+      line-height: 1.5;
+    }
+
+    /* === CARD WRAPPER === */
+    .card-wrapper {
+      width: 100%;
+      max-width: 440px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-card);
+      box-shadow: var(--shadow-card);
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Subtle electrical top accent line */
+    .card-accent-bar {
+      height: 4px;
+      width: 100%;
+      background: linear-gradient(90deg, var(--jmeg-blue) 0%, var(--jmeg-blue-electric) 50%, var(--jmeg-silver) 100%);
+    }
+
+    /* === HEADER & IDENTITY === */
+    .card-header {
+      padding: 26px 20px 18px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: linear-gradient(180deg, rgba(0, 72, 129, 0.1) 0%, rgba(22, 27, 34, 0) 100%);
+    }
+
+    /* JMEG Logo container */
+    .logo-badge {
+      background: #ffffff;
+      padding: 8px 22px;
+      border-radius: var(--radius-pill);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.35);
+      margin-bottom: 22px;
+      transition: transform 0.2s ease;
+    }
+
+    .logo-badge:hover {
+      transform: scale(1.02);
+    }
+
+    .company-logo {
+      height: 38px;
+      max-width: 160px;
+      width: auto;
+      object-fit: contain;
+      display: block;
+    }
+
+    /* Profile Avatar */
+    .avatar-wrapper {
+      position: relative;
+      width: 124px;
+      height: 124px;
+      margin-bottom: 16px;
+    }
+
+    .avatar-ring {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      padding: 3px;
+      background: linear-gradient(135deg, var(--jmeg-blue) 0%, var(--jmeg-blue-electric) 55%, var(--jmeg-silver) 100%);
+      box-shadow: 0 10px 25px -4px rgba(0, 72, 129, 0.6), 0 0 14px rgba(56, 189, 248, 0.2);
+    }
+
+    .profile-photo {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: center 15%;
+      display: block;
+      background: #1e242d;
+    }
+
+    /* Online / Direct indicator pulse */
+    .status-badge {
+      position: absolute;
+      bottom: 2px;
+      right: 4px;
+      width: 22px;
+      height: 22px;
+      background: #10b981;
+      border: 3px solid var(--card-bg);
+      border-radius: 50%;
+      box-shadow: 0 0 8px rgba(16, 185, 129, 0.6);
+    }
+
+    .status-badge::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: -3px;
+      left: -3px;
+      border-radius: 50%;
+      border: 2px solid #10b981;
+      animation: pulse 2.4s infinite ease-out;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); opacity: 0.8; }
+      70% { transform: scale(1.8); opacity: 0; }
+      100% { transform: scale(2); opacity: 0; }
+    }
+
+    /* Name & Titles */
+    .name {
+      font-size: 1.65rem;
+      font-weight: 700;
+      color: var(--text-white);
+      letter-spacing: -0.02em;
+      margin-bottom: 6px;
+    }
+
+    .title-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(56, 189, 248, 0.12);
+      border: 1px solid rgba(56, 189, 248, 0.28);
+      color: var(--jmeg-blue-electric);
+      font-size: 0.88rem;
+      font-weight: 600;
+      padding: 4px 14px;
+      border-radius: var(--radius-pill);
+      margin-bottom: 6px;
+      letter-spacing: 0.01em;
+    }
+
+    .title-pill svg {
+      width: 14px;
+      height: 14px;
+      fill: currentColor;
+    }
+
+    .company-title {
+      font-size: 0.92rem;
+      font-weight: 500;
+      color: var(--jmeg-silver);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .company-dot {
+      display: inline-block;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background-color: var(--jmeg-silver);
+    }
+
+    /* === ACTIONS SECTION === */
+    .card-body {
+      padding: 4px 18px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    /* Hero CTA: Save Contact */
+    .cta-button {
+      width: 100%;
+      min-height: 56px;
+      background: linear-gradient(135deg, var(--jmeg-blue) 0%, var(--jmeg-blue-light) 100%);
+      color: var(--text-white);
+      border: none;
+      border-radius: var(--radius-lg);
+      padding: 14px 20px;
+      font-size: 1rem;
+      font-weight: 700;
+      font-family: inherit;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      box-shadow: var(--shadow-cta);
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+      text-decoration: none;
+    }
+
+    .cta-button:hover {
+      background: linear-gradient(135deg, #00569c 0%, #027fd6 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 32px -4px rgba(0, 110, 199, 0.7);
+    }
+
+    .cta-button:active {
+      transform: translateY(1px) scale(0.98);
+      box-shadow: 0 4px 16px rgba(0, 110, 199, 0.4);
+    }
+
+    .cta-button svg {
+      width: 20px;
+      height: 20px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2.2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      flex-shrink: 0;
+    }
+
+    /* Section Headers */
+    .section-label {
+      font-size: 0.76rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-dim);
+      margin-bottom: 2px;
+      padding-left: 2px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    /* Contact Links Stack */
+    .actions-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .action-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .action-card {
+      flex: 1;
+      min-height: 60px;
+      background: var(--btn-bg);
+      border: 1px solid var(--btn-border);
+      border-radius: var(--radius-md);
+      padding: 10px 14px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: inherit;
+      transition: all 0.2s ease;
+      box-shadow: var(--shadow-btn);
+    }
+
+    .action-card:hover {
+      background: var(--btn-hover);
+      border-color: rgba(56, 189, 248, 0.3);
+      transform: translateX(2px);
+    }
+
+    .action-card:active {
+      transform: scale(0.98);
+      background: #232c39;
+    }
+
+    .icon-box {
+      width: 42px;
+      height: 42px;
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: transform 0.2s ease;
+    }
+
+    .action-card:hover .icon-box {
+      transform: scale(1.08);
+    }
+
+    .icon-box.mobile {
+      background: rgba(56, 189, 248, 0.15);
+      color: var(--jmeg-blue-electric);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+    }
+
+    .icon-box.direct {
+      background: rgba(0, 72, 129, 0.28);
+      color: #7dd3fc;
+      border: 1px solid rgba(0, 72, 129, 0.4);
+    }
+
+    .icon-box.web {
+      background: rgba(182, 183, 186, 0.14);
+      color: var(--jmeg-silver-light);
+      border: 1px solid rgba(182, 183, 186, 0.25);
+    }
+
+    .icon-box svg {
+      width: 20px;
+      height: 20px;
+      stroke-width: 2;
+      stroke: currentColor;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .action-info {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .action-label {
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      letter-spacing: 0.02em;
+    }
+
+    .action-val {
+      font-size: 0.98rem;
+      font-weight: 600;
+      color: var(--text-white);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .action-arrow {
+      color: var(--text-dim);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding-right: 2px;
+      transition: transform 0.2s ease, color 0.2s ease;
+    }
+
+    .action-card:hover .action-arrow {
+      color: var(--jmeg-blue-electric);
+      transform: translateX(3px);
+    }
+
+    .action-arrow svg {
+      width: 18px;
+      height: 18px;
+      stroke-width: 2.2;
+      stroke: currentColor;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    /* Copy button */
+    .copy-btn {
+      width: 44px;
+      height: 60px;
+      background: var(--btn-bg);
+      border: 1px solid var(--btn-border);
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      box-shadow: var(--shadow-btn);
+    }
+
+    .copy-btn:hover {
+      background: var(--btn-hover);
+      color: var(--jmeg-blue-electric);
+      border-color: rgba(56, 189, 248, 0.3);
+    }
+
+    .copy-btn:active {
+      transform: scale(0.92);
+    }
+
+    .copy-btn svg {
+      width: 18px;
+      height: 18px;
+      stroke-width: 2;
+      stroke: currentColor;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    /* === OVERVIEW / ABOUT CARDS === */
+    .info-card {
+      background: var(--card-inner);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-lg);
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .info-card-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--jmeg-blue-electric);
+    }
+
+    .info-card-header svg {
+      width: 17px;
+      height: 17px;
+      stroke-width: 2;
+      stroke: currentColor;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      flex-shrink: 0;
+    }
+
+    .info-card-header.company {
+      color: var(--jmeg-silver-light);
+    }
+
+    .info-text {
+      font-size: 0.88rem;
+      line-height: 1.55;
+      color: #cbd5e1;
+    }
+
+    /* === FOOTER & SHARE BUTTON === */
+    .card-footer {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      padding-top: 4px;
+    }
+
+    .share-btn {
+      background: transparent;
+      border: 1px dashed rgba(255, 255, 255, 0.16);
+      color: var(--text-muted);
+      border-radius: var(--radius-pill);
+      padding: 8px 18px;
+      font-size: 0.82rem;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.2s ease;
+    }
+
+    .share-btn:hover {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: var(--jmeg-blue-electric);
+      color: var(--text-white);
+    }
+
+    .share-btn svg {
+      width: 15px;
+      height: 15px;
+      stroke-width: 2;
+      stroke: currentColor;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .nfc-tag-indicator {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.74rem;
+      font-weight: 500;
+      color: var(--text-dim);
+      letter-spacing: 0.04em;
+    }
+
+    .nfc-tag-indicator svg {
+      width: 14px;
+      height: 14px;
+      stroke-width: 2;
+      stroke: currentColor;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .footer-copy {
+      font-size: 0.72rem;
+      color: #475569;
+      text-align: center;
+    }
+
+    /* === FLOATING TOAST NOTIFICATION === */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: #1e293b;
+      color: #ffffff;
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      padding: 10px 20px;
+      border-radius: var(--radius-pill);
+      font-size: 0.86rem;
+      font-weight: 500;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5), 0 0 15px rgba(56, 189, 248, 0.2);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      z-index: 9999;
+      white-space: nowrap;
+    }
+
+    .toast.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+
+    .toast svg {
+      width: 16px;
+      height: 16px;
+      stroke: #38bdf8;
+      stroke-width: 2.2;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+  </style>
+</head>
+<body>
+
+  <main class="card-wrapper">
+    <article class="card">
+      <!-- Decorative Brand Top Accent -->
+      <div class="card-accent-bar" aria-hidden="true"></div>
+
+      <!-- Header: Logo, Avatar, Name & Roles -->
+      <header class="card-header">
+        <!-- JMEG Corporate Logo Badge -->
+        <div class="logo-badge" title="JMEG, LLC">
+          <img 
+            src="static/jmeg_logo.png" 
+            alt="JMEG, LLC Logo" 
+            class="company-logo" 
+            onerror="this.onerror=null; this.src='static/JMEG logo (1).png';"
+          />
+        </div>
+
+        <!-- Profile Avatar with Electrical Accent Ring -->
+        <div class="avatar-wrapper">
+          <div class="avatar-ring">
+            <img 
+              src="static/profile.png" 
+              alt="Elijah Sellers - IT Specialist" 
+              class="profile-photo" 
+              onerror="this.onerror=null; this.src='static/IMG_3915.jpg';"
+            />
+          </div>
+          <span class="status-badge" title="Direct Contact Active" aria-label="Active contact indicator"></span>
+        </div>
+
+        <h1 class="name">Elijah Sellers</h1>
+        
+        <div class="title-pill">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+          </svg>
+          <span>IT Specialist</span>
+        </div>
+
+        <p class="company-title">
+          <span>JMEG, LLC</span>
+          <span class="company-dot" aria-hidden="true"></span>
+          <span>Texas Electrical Contractor</span>
+        </p>
+      </header>
+
+      <!-- Interactive Actions & Contact Data -->
+      <section class="card-body">
+        <!-- Hero Primary Action: Save to Contacts (.vcf) -->
+        <button type="button" class="cta-button" id="saveContactBtn" onclick="saveVCard()">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+            <circle cx="9" cy="7" r="4"></circle>
+            <line x1="19" y1="8" x2="19" y2="14"></line>
+            <line x1="22" y1="11" x2="16" y2="11"></line>
+          </svg>
+          <span>Save to Contacts</span>
+        </button>
+
+        <!-- Direct Tap Targets -->
+        <div>
+          <h2 class="section-label">Direct Communication</h2>
+          <div class="actions-list">
+            <!-- Call Mobile -->
+            <div class="action-row">
+              <a href="tel:817-822-3536" class="action-card" id="callMobileLink">
+                <div class="icon-box mobile" aria-hidden="true">
+                  <svg viewBox="0 0 24 24">
+                    <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
+                    <line x1="12" y1="18" x2="12.01" y2="18"></line>
+                  </svg>
+                </div>
+                <div class="action-info">
+                  <span class="action-label">Work Mobile</span>
+                  <span class="action-val">817-822-3536</span>
+                </div>
+                <div class="action-arrow" aria-hidden="true">
+                  <svg viewBox="0 0 24 24">
+                    <polyline points="9 18 15 12 9 6"></polyline>
+                  </svg>
+                </div>
+              </a>
+              <button type="button" class="copy-btn" onclick="copyToClipboard('817-822-3536', 'Mobile number')" title="Copy Mobile Number" aria-label="Copy Mobile Number">
+                <svg viewBox="0 0 24 24">
+                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                </svg>
+              </button>
+            </div>
+
+            <!-- Call Direct -->
+            <div class="action-row">
+              <a href="tel:972-888-6107" class="action-card" id="callDirectLink">
+                <div class="icon-box direct" aria-hidden="true">
+                  <svg viewBox="0 0 24 24">
+                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                  </svg>
+                </div>
+                <div class="action-info">
+                  <span class="action-label">Direct Line</span>
+                  <span class="action-val">972-888-6107</span>
+                </div>
+                <div class="action-arrow" aria-hidden="true">
+                  <svg viewBox="0 0 24 24">
+                    <polyline points="9 18 15 12 9 6"></polyline>
+                  </svg>
+                </div>
+              </a>
+              <button type="button" class="copy-btn" onclick="copyToClipboard('972-888-6107', 'Direct line')" title="Copy Direct Line" aria-label="Copy Direct Line">
+                <svg viewBox="0 0 24 24">
+                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                </svg>
+              </button>
+            </div>
+
+            <!-- Visit Website -->
+            <div class="action-row">
+              <a href="https://www.jmeg.us" target="_blank" rel="noopener noreferrer" class="action-card" id="visitWebsiteLink">
+                <div class="icon-box web" aria-hidden="true">
+                  <svg viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="2" y1="12" x2="22" y2="12"></line>
+                    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                  </svg>
+                </div>
+                <div class="action-info">
+                  <span class="action-label">Company Website</span>
+                  <span class="action-val">www.jmeg.us</span>
+                </div>
+                <div class="action-arrow" aria-hidden="true">
+                  <svg viewBox="0 0 24 24">
+                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                    <polyline points="15 3 21 3 21 9"></polyline>
+                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                  </svg>
+                </div>
+              </a>
+              <button type="button" class="copy-btn" onclick="copyToClipboard('https://www.jmeg.us', 'Website URL')" title="Copy Website Link" aria-label="Copy Website Link">
+                <svg viewBox="0 0 24 24">
+                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Overview Information Cards -->
+        <div>
+          <h2 class="section-label">Overview & Details</h2>
+          <div class="actions-list">
+            <!-- Role Summary Card -->
+            <article class="info-card">
+              <div class="info-card-header">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect>
+                  <rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect>
+                  <line x1="6" y1="6" x2="6.01" y2="6"></line>
+                  <line x1="6" y1="18" x2="6.01" y2="18"></line>
+                </svg>
+                <span>Role Summary</span>
+              </div>
+              <p class="info-text">
+                Elijah leads technology operations, network infrastructure, hardware systems, and IT support across JMEG, ensuring seamless digital connectivity between corporate offices and field construction teams.
+              </p>
+            </article>
+
+            <!-- Company Summary Card -->
+            <article class="info-card">
+              <div class="info-card-header company">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                  <polyline points="2 17 12 22 22 17"></polyline>
+                  <polyline points="2 12 12 17 22 12"></polyline>
+                </svg>
+                <span>About JMEG, LLC</span>
+              </div>
+              <p class="info-text">
+                JMEG, LLC is a premier Texas electrical contractor delivering full-service commercial, industrial, VDC/BIM modeling, prefabrication, and complex design-build engineering solutions.
+              </p>
+            </article>
+          </div>
+        </div>
+
+        <!-- Card Footer -->
+        <footer class="card-footer">
+          <button type="button" class="share-btn" onclick="shareCard()" title="Share digital business card">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="18" cy="5" r="3"></circle>
+              <circle cx="6" cy="12" r="3"></circle>
+              <circle cx="18" cy="19" r="3"></circle>
+              <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+              <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+            </svg>
+            <span>Share This Card</span>
+          </button>
+
+          <div class="nfc-tag-indicator">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M5 12.55a11 11 0 0 1 14.08 0"></path>
+              <path d="M1.42 9a16 16 0 0 1 21.16 0"></path>
+              <path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path>
+              <line x1="12" y1="20" x2="12.01" y2="20"></line>
+            </svg>
+            <span>NFC Ready • Instant Tap</span>
+          </div>
+
+          <p class="footer-copy">© 2026 JMEG, LLC • Technology & Operations</p>
+        </footer>
+      </section>
+    </article>
+  </main>
+
+  <!-- Notification Toast -->
+  <div class="toast" id="toastNotification" role="status" aria-live="polite">
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <polyline points="20 6 9 17 4 12"></polyline>
+    </svg>
+    <span id="toastMessage">Copied to clipboard</span>
+  </div>
+
+  <script>
+    // Embedded thumbnail photo in base64 for vCard 3.0 photo import
+    const CONTACT_PHOTO_BASE64 = "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";
+
+    /**
+     * Dynamically generates and downloads Elijah_Sellers.vcf
+     */
+    function saveVCard() {
+      const vcardLines = [
+        'BEGIN:VCARD',
+        'VERSION:3.0',
+        'N:Sellers;Elijah;;;',
+        'FN:Elijah Sellers',
+        'ORG:JMEG, LLC',
+        'TITLE:IT Specialist',
+        'TEL;TYPE=CELL,VOICE:817-822-3536',
+        'TEL;TYPE=WORK,VOICE:972-888-6107',
+        'URL;TYPE=WORK:https://www.jmeg.us',
+        'NOTE:Elijah leads technology operations, network infrastructure, hardware systems, and IT support across JMEG, ensuring seamless digital connectivity between corporate offices and field construction teams.',
+        'PHOTO;ENCODING=b;TYPE=JPEG:' + CONTACT_PHOTO_BASE64,
+        'END:VCARD'
+      ];
+
+      const vcardContent = vcardLines.join('\r\n');
+      const blob = new Blob([vcardContent], { type: 'text/vcard;charset=utf-8;' });
+      const downloadUrl = window.URL.createObjectURL(blob);
+      
+      const link = document.createElement('a');
+      link.href = downloadUrl;
+      link.setAttribute('download', 'Elijah_Sellers.vcf');
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      
+      setTimeout(() => {
+        window.URL.revokeObjectURL(downloadUrl);
+      }, 2000);
+
+      showToast('Contact card downloaded! Add to Contacts.');
+    }
+
+    /**
+     * Copy text to clipboard with modern fallback and toast
+     */
+    function copyToClipboard(text, label) {
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(text).then(() => {
+          showToast(label + ' copied to clipboard');
+        }).catch(() => {
+          fallbackCopy(text, label);
+        });
+      } else {
+        fallbackCopy(text, label);
+      }
+    }
+
+    function fallbackCopy(text, label) {
+      const textArea = document.createElement('textarea');
+      textArea.value = text;
+      textArea.style.position = 'fixed';
+      textArea.style.left = '-999999px';
+      textArea.style.top = '-999999px';
+      document.body.appendChild(textArea);
+      textArea.focus();
+      textArea.select();
+      try {
+        document.execCommand('copy');
+        showToast(label + ' copied to clipboard');
+      } catch (err) {
+        showToast('Unable to auto-copy');
+      }
+      document.body.removeChild(textArea);
+    }
+
+    /**
+     * Mobile Share API
+     */
+    function shareCard() {
+      const shareData = {
+        title: 'Elijah Sellers | IT Specialist - JMEG, LLC',
+        text: 'Contact details for Elijah Sellers, IT Specialist at JMEG, LLC.',
+        url: window.location.href
+      };
+
+      if (navigator.share) {
+        navigator.share(shareData).catch((err) => {
+          if (err.name !== 'AbortError') {
+            copyToClipboard(window.location.href, 'Card link');
+          }
+        });
+      } else {
+        copyToClipboard(window.location.href, 'Card link');
+      }
+    }
+
+    /**
+     * Floating Toast Helper
+     */
+    let toastTimeout;
+    function showToast(message) {
+      const toast = document.getElementById('toastNotification');
+      const toastMsg = document.getElementById('toastMessage');
+      if (!toast || !toastMsg) return;
+
+      toastMsg.textContent = message;
+      toast.classList.add('show');
+
+      clearTimeout(toastTimeout);
+      toastTimeout = setTimeout(() => {
+        toast.classList.remove('show');
+      }, 2800);
+    }
+  </script>
+</body>
+</html>
